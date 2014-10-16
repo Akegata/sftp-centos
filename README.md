@@ -2,7 +2,7 @@ sftp
 ====
 
 Fork of atmoz/sftp:
-Simple and easy to use SFTP server based on Debian
+Simple and easy to use SFTP server based on CentOS
 
 Usage
 -----
