@@ -1,16 +1,16 @@
 FROM centos:centos7
 MAINTAINER Martin Hovmöller
 
-RUN yum -y install openssh-server
+RUN yum -y install git php php-mbstring php-mysql php-xml unzip
 
-RUN mkdir -p /var/run/sshd
-RUN groupadd --system sftp
+ADD php.conf /etc/httpd/conf.d/
+ADD httpd.conf /etc/httpd/conf/
 
-ADD . /root
-WORKDIR /root
-RUN mv sshd_config /etc/ssh/sshd_config
-RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key
+WORKDIR /var/www/html/
+RUN git clone https://github.com/gothfox/Tiny-Tiny-RSS.git
+ADD config.php /var/www/html/Tiny-Tiny-RSS/config.php
+RUN git clone https://github.com/tribut/ttrss-videoframes.git; mv ttrss-videoframes/videoframes Tiny-Tiny-RSS/plugins/; rm -r ttrss-videoframes
+RUN chown -R apache.apache /var/www/html/Tiny-Tiny-RSS
+ADD run.sh /tmp/
 
-EXPOSE 22
-
-CMD ["/bin/bash", "run"]
+CMD /tmp/run.sh && /usr/sbin/httpd && /usr/bin/php /var/www/html/Tiny-Tiny-RSS/update.php --daemon
