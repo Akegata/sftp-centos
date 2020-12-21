@@ -46,3 +46,9 @@ docker run \
     -v "/sftp/http:/home/bar/http" \
     -p 2222:22 -d atmoz/sftp
 ```
+
+
+```
+Use atmoz/makepasswd to generate encrypted password:
+echo -n "your-password" | docker run -i --rm atmoz/makepasswd --crypt-md5 --clearfrom=-
+```
