@@ -70,4 +70,3 @@ services:
 Use atmoz/makepasswd to generate encrypted password:
 echo -n "your-password" | docker run -i --rm atmoz/makepasswd --crypt-md5 --clearfrom=-
 ```
-
