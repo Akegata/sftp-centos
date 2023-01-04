@@ -21,7 +21,7 @@ jobs:
       - name: Build image
         env:
           SOURCE_TAG: ${{ steps.tag_name.outputs.SOURCE_TAG }}
-        run: ./run
+        run: bash ./run
       - name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v2
         env:
