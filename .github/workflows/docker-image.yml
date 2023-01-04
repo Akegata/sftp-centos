@@ -47,6 +47,13 @@ jobs:
 
           docker push --all-tags $IMAGE_NAME
           docker logout
+          
+      - name: Docker Hub Description
+        uses: peter-evans/dockerhub-description@v2
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKERHUB_REPOSITORY: akegata/sftp-centos
 
       - name: Push images to GitHub registry
         if: github.ref == 'refs/heads/master'
