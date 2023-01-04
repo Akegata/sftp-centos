@@ -10,7 +10,6 @@ Simple and easy to use SFTP server based on CentOS
 The users are chrooted to their home folders, so it is important to mount the volumes in separate folders inside the user's home folder (/home/your-user/**your-folder**).
 
 ### Examples
-
 Simple (one user and one folder):
 
 ```
