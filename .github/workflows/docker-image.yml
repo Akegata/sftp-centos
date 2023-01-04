@@ -39,12 +39,6 @@ jobs:
             --label="org.opencontainers.image.revision=$GITHUB_SHA" \
             --label="org.opencontainers.image.created=$(date --rfc-3339=seconds)"
 
-      - name: Verify signature
-        if: github.ref == 'refs/heads/master'
-        uses: atmoz/git-verify-ref@master
-        with:
-          import-github-users: atmoz
-
       - name: Push images to Docker Hub registry
         if: github.ref == 'refs/heads/master'
         run: |
