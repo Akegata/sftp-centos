@@ -54,10 +54,7 @@ jobs:
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com \
             -u ${{ github.actor }} --password-stdin
 
-          TAG_DEBIAN=docker.pkg.github.com/$GITHUB_REPOSITORY/debian
-          TAG_ALPINE=docker.pkg.github.com/$GITHUB_REPOSITORY/alpine
-          docker tag $IMAGE_NAME:debian $TAG_DEBIAN
-          docker tag $IMAGE_NAME:alpine $TAG_ALPINE
-          docker push $TAG_DEBIAN
-          docker push $TAG_ALPINE
+          TAG_CENTOS=docker.pkg.github.com/$GITHUB_REPOSITORY
+          docker tag $IMAGE_NAME:centos $TAG_CENTOS
+          docker push $TAG_CENTOS
           docker logout docker.pkg.github.com
