@@ -1,12 +1,8 @@
 # sftp
-====
-
 Fork of atmoz/sftp:
 Simple and easy to use SFTP server based on CentOS
 
 ## Usage
------
-
 - Define users and passwords in comma separated list with SFTP_USERS ("user1:pass1[:uid][:e],user2:pass2[:uid][:e]").
 - Mount volumes in user's home folder.
 - Supports encrypted password and optional UID specification.
@@ -14,7 +10,6 @@ Simple and easy to use SFTP server based on CentOS
 The users are chrooted to their home folders, so it is important to mount the volumes in separate folders inside the user's home folder (/home/your-user/**your-folder**).
 
 ### Examples
---------
 
 Simple (one user and one folder):
 
