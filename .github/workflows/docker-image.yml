@@ -54,6 +54,9 @@ jobs:
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com \
             -u ${{ github.actor }} --password-stdin
 
+          echo GITHUB_REPOSITORY = $GITHUB_REPOSITORY
+          REPONAME=$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')
+          echo REPONAME = $REPONAME
           TAG_CENTOS=$(echo docker.pkg.github.com/$GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')
           docker tag $IMAGE_NAME:centos $TAG_CENTOS
           docker push $TAG_CENTOS
