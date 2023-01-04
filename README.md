@@ -1,10 +1,10 @@
-sftp
+# sftp
 ====
 
 Fork of atmoz/sftp:
 Simple and easy to use SFTP server based on CentOS
 
-Usage
+## Usage
 -----
 
 - Define users and passwords in comma separated list with SFTP_USERS ("user1:pass1[:uid][:e],user2:pass2[:uid][:e]").
@@ -13,7 +13,7 @@ Usage
 
 The users are chrooted to their home folders, so it is important to mount the volumes in separate folders inside the user's home folder (/home/your-user/**your-folder**).
 
-Examples
+### Examples
 --------
 
 Simple (one user and one folder):
@@ -47,7 +47,31 @@ docker run \
     -p 2222:22 -d atmoz/sftp
 ```
 
+### Docker compose example
+```
+---
+version: "2.1"
+services:
+  sftp-compose:
+    image: akegata/sftp-centos
+    container_name: sftp
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      # Any $ in SFTP_USERS needs to be duplicated to be parsed correctly.
+      - SFTP_USERS=<user>:<password>:<uid>:e,
+                   <user2>:<password>:<uid>:e,
+    volumes:
+      - <host-dir>/upload:/home/<user>/pool/
+      - <host-dir>/upload:/home/<user2>/pool/
+    ports:
+      - 2200:22/tcp # Allows HTTP access to the internal webserver.
 
+```
+
+#### Generate encrypted password
 ```
 Use atmoz/makepasswd to generate encrypted password:
 echo -n "your-password" | docker run -i --rm atmoz/makepasswd --crypt-md5 --clearfrom=-

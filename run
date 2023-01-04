@@ -1,5 +1,7 @@
 #!/bin/bash
 
+SFTP_USERS=$(echo $SFTP_USERS | tr -d ' ')
+
 # Add users
 IFS=',' read -a users <<< "$SFTP_USERS"
 for userData in "${users[@]}"; do
